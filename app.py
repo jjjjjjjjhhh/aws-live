@@ -75,20 +75,12 @@ class PositionTable(db.Model):
     
     
     position_id = db.Column(db.String(5), primary_key=True)
-    company_id = db.Column(db.String(5), db.ForeignKey('Company.company_id'), nullable=False)
+    company_id = db.Column(db.String(5), nullable=False)
     position = db.Column(db.String(50), nullable=False)
     job_desc = db.Column(db.String(255), nullable=False)
     allowance = db.Column(db.DECIMAL(precision=6, scale=2), nullable=False)
 
-    # Define a relationship to the Company table
-    company = db.relationship('Company', backref='positions')
-
-    def __init__(self, position_id, company_id, position, job_desc, allowance):
-        self.position_id = position_id
-        self.company_id = company_id
-        self.position = position
-        self.job_desc = job_desc
-        self.allowance = allowance
+  
 
 @app.route('/GetComOutput')
 def GetComOutput():
