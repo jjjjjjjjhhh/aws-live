@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <center>
+        <meta charset="utf-8">
+        <title>Company Registeration</title>
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+
+        
+    </center>
+</head>
+
+<body>
+    <center>
+        <div class="container-xxl bg-white p-0">
+            <!-- Navbar Start -->
+       <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+            <h1 class="m-0 text-primary">TARUMT Student Internship</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ms-auto p-4 p-lg-0">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="admin.html" class="nav-link">Admin</a>
+                </li>
+                <!-- Student Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Student
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="studentDropdown">
+                        <a class="dropdown-item" href="AddStudApply.html">Internship Application</a>
+                  
+                        <a class="dropdown-item" href="GetScoreOutput.html">View Score</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="GetComOutput.html" class="nav-link">Company</a>
+                </li>
+                <li class="nav-item">
+                    <a href="portfolio.html" class="nav-link">Portfolio</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+   
+    <!-- Navbar End -->
+
+            <!-- Header End -->
+            <div class="container-xxl py-5 bg-dark page-header mb-5">
+                <div class="container my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown" style="text-align: left;">Company</h1>
+                    
+                </div>
+            </div>
+            <!-- Header End -->
+
+            <!-- Company Page Content -->
+            <div class="container-xxl bg-white p-0">
+                <h1 class="text-center mt-4">Company Registeration</h1>
+                <form action="/company-contact" method="POST">
+                    <h3 class="mt-4">Please enter the details of the company</h3>
+
+                    <!-- Company Id -->
+                    <div class="mb-3">
+                        <label for="companyId" class="form-label" style="margin-top: 20px;">Company Id</label>
+                        <input type="text" class="form-control" id="companyId" name="companyId" required>
+                    </div>
+
+                    <!-- Company Name -->
+                    <div class="mb-3">
+                        <label for="companyName" class="form-label" style="margin-top: 20px;">Company Name</label>
+                        <input type="text" class="form-control" id="companyName" name="companyName" required>
+                    </div>
+
+                    <!-- Company Industry -->
+                    <div class="mb-3">
+                        <label for="companyIndustry" class="form-label" style="margin-top: 20px;">Company Industry</label>
+                        <select class="form-select" id="companyIndustry" name="companyIndustry" required>
+                            <option value="" disabled selected>Please select your company industry</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Hospitality">Hospitality</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Education">Education</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Telecommunications">Telecommunications</option>
+                            <option value="Energy">Energy</option>
+                            <option value="Agriculture">Agriculture</option>
+                            <option value="Real Estate">Real Estate</option>
+                            <option value="Automotive">Automotive</option>
+                            <option value="Pharmaceuticals">Pharmaceuticals</option>
+                        </select>
+                    </div>
+                    
+
+                    <!-- Company State -->
+                    <div class="mb-3">
+                        <label for="companyState" class="form-label" style="margin-top: 20px;">State</label>
+                        <select class="form-select" id="companyState" name="companyState" required>
+                            <option value="" disabled selected>Please select your company state</option>
+                            <option value="Johor">Johor</option>
+                            <option value="Kedah">Kedah</option>
+                            <option value="Kelantan">Kelantan</option>
+                            <option value="Melaka">Melaka</option>
+                            <option value="Negeri Sembilan">Negeri Sembilan</option>
+                            <option value="Pahang">Pahang</option>
+                            <option value="Penang">Penang</option>
+                            <option value="Perak">Perak</option>
+                            <option value="Perlis">Perlis</option>
+                            <option value="Sabah">Sabah</option>
+                            <option value="Sarawak">Sarawak</option>
+                            <option value="Selangor">Selangor</option>
+                            <option value="Terengganu">Terengganu</option>
+                            <option value="Wilayah Persekutuan Kuala Lumpur">Wilayah Persekutuan Kuala Lumpur</option>
+                            <option value="Wilayah Persekutuan Labuan">Wilayah Persekutuan Labuan</option>
+                            <option value="Wilayah Persekutuan Putrajaya">Wilayah Persekutuan Putrajaya</option>
+                        </select>
+                    </div>
+                    
+
+                    <!-- Contact Person's Name -->
+                    <div class="mb-3">
+                        <label for="contactName" class="form-label">Contact Person's Name</label>
+                        <input type="text" class="form-control" id="contactName" name="contactName" required>
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="mb-3">
+                        <label for="contactEmail" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                    </div>
+
+
+                    
+                    
+                    
+
+               
+                    
+
+                </form>
+                <!-- Submit Button -->
+                <button id="addComButton" class="btn btn-primary">Submit Company Details</button>
+
+
+                    <script>
+                        // Add a click event listener to the button
+                        document.getElementById('addComButton').addEventListener('click', function () {
+                            // Specify the URL to which you want to redirect
+                            var redirectTo = 'AddPos.html';
+
+                            // Redirect the user to the specified URL
+                            window.location.href = redirectTo;
+                        });
+                    </script>
+
+            </div>
+            <!-- End of Company Page Content -->
+
+            <!-- Footer Start -->
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">2023 - TAR UMT FOCS ITP</a>, All Right Reserved. Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        </div>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+        <!-- JavaScript to set the active class based on the current page -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Get the current page URL
+                var currentUrl = window.location.href;
+
+                // Check if the URL contains "AddCom.html" (your Company page)
+                if (currentUrl.indexOf("AddCom.html") !== -1) {
+                    // If the URL contains "AddCom.html", add the "active" class to the Company link
+                    var companyLink = document.querySelector(".nav-item.nav-link[href='AddCom.html']");
+                    if (companyLink) {
+                        companyLink.classList.add("active");
+                    }
+                }
+            });
+        </script>
+
+        
+    </center>
+
+</body>
+
+</html>
