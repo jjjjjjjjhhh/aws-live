@@ -100,7 +100,7 @@ def GetComOutput():
 @app.route('/GetPosOutput')
 def GetPosOutput():
    
-    positions = positions.query.all()
+    positions = PositionTable.query.all()
     
     return render_template('GetPosOutput.html', positions=positions)
 
