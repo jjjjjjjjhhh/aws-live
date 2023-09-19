@@ -14,43 +14,43 @@ db = SQLAlchemy(app)
 def index():
     return render_template('index.html')
 
-@app.route("/admin")
+@app.route("/admin.html")
 def admin():
     return render_template('admin.html')
 
-@app.route("/adminCom")
+@app.route("/adminCom.html")
 def adminCom():
     return render_template('adminCom.html')
 
-@app.route("/adminLec")
+@app.route("/adminLec.html")
 def adminLec():
     return render_template('adminLec.html')
 
-@app.route("/adminStud")
+@app.route("/adminStud.html")
 def adminStud():
     return render_template('adminStud.html')
 
-@app.route("/AfterSubmit")
+@app.route("/AfterSubmit.html")
 def AfterSubmit():
     return render_template('AfterSubmit.html')
 
-@app.route("/jobdetail1")
+@app.route("/job-details-1.html")
 def jobdetail1():
     return render_template('job-detail-1.html')
 
-@app.route("/jobdetail2")
+@app.route("/job-details-2.html")
 def jobdetail2():
     return render_template('job-detail-2.html')
 
-@app.route("/jobdetail3")
+@app.route("/job-details-3.html")
 def jobdetail3():
     return render_template('job-detail-3.html')
 
-@app.route("/jobdetail4")
+@app.route("/job-details-4.html")
 def jobdetail4():
     return render_template('job-detail-4.html')
 
-@app.route("/jobdetail5")
+@app.route("/job-details-5.html")
 def jobdetail5():
     return render_template('job-detail-5.html')
 
@@ -82,14 +82,14 @@ class PositionTable(db.Model):
 
   
 
-@app.route('/GetComOutput')
+@app.route('/GetComOutput.html')
 def GetComOutput():
    
     companies = Company.query.all()
     
     return render_template('GetComOutput.html', companies=companies)
 
-@app.route('/GetPosOutput')
+@app.route('/GetPosOutput.html')
 def GetPosOutput():
    
     positions = PositionTable.query.all()
