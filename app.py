@@ -283,20 +283,20 @@ def add_report():
         report_id = request.form["reportId"]
         student_id = request.form["reportStudId"]
         submission_date = request.form["reportDate"]
-        resume_file = request.files["inStudResume"]
+        report_file = request.files["reportPDF"]
 
-        if report_id and student_id and submission_date and resume_file:
+        if report_id and student_id and submission_date and report_file:
             
-            new_resume_name = f"{student_id}_Resume.pdf"  
+            new_report_name = f"{student_id}_Report.pdf"  
 
          
             s3.upload_fileobj(
-                resume_file,
+                report_file,
                 app.config['FLASKS3_BUCKET_NAME'],
-                new_resume_name,
+                new_report_name,
                 ExtraArgs={
                     'ACL': 'public-read',
-                    'ContentType': resume_file.content_type
+                    'ContentType': report_file.content_type
                 }
             )
         
