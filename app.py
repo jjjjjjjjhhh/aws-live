@@ -3,6 +3,7 @@ from flask_s3 import FlaskS3
 from flask_sqlalchemy import SQLAlchemy
 import os
 import boto3
+from botocore.exceptions import NoCredentialsError
 #from sqlalchemy import Column, String, String, Date, Integer
 
 from config import *
@@ -289,23 +290,39 @@ def add_report():
             
             new_report_name = f"{student_id}_Report.pdf"  
 
-         
-            s3.upload_fileobj(
-                report_file,
-                app.config['FLASKS3_BUCKET_NAME'],
-                new_report_name,
-                ExtraArgs={
-                    'ACL': 'public-read',
-                    'ContentType': report_file.content_type
-                }
+             
+            s3 = boto3.client(
+                's3',
+               
+                region_name=customregion
             )
+
+            try:
+                s3.upload_fileobj(
+                    report_file,
+                    custombucket,
+                    new_report_name,
+                    ExtraArgs={
+                        'ACL': 'public-read',
+                        'ContentType': report_file.content_type
+                    }
+                )
+
+                
+                new_report = Report(report_id=report_id, student_id=student_id, submission_date=submission_date)
+                db.session.add(new_report)
+                db.session.commit()
+
+                return redirect(url_for("after_submit"))
+
+            except NoCredentialsError:
+                return "S3 credentials not available. Please configure AWS credentials."
+
+    return "Report submission failed."
+
+         
+            
         
-        new_report = Report(report_id=report_id, student_id=student_id, submission_date=submission_date)
-        db.session.add(new_report)
-        db.session.commit()
-
-        return redirect(url_for("after_submit"))
-
 @app.route("/AddStudApply.html")
 def add_apply_form():
     return render_template("AddStudApply.html")
