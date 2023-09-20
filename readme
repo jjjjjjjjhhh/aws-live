@@ -8,6 +8,7 @@ cd aws-live
 dnf install python-pip -y
 pip3 install flask pymysql boto3
 pip install flask_sqlalchemy
+pip install flask_s3
 python3 app.py
 
 
