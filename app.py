@@ -314,24 +314,16 @@ def add_report():
                 custombucket,
                 report_name_in_s3)
 
-            # Return the redirect here, outside of the try block
+           
             return redirect(url_for("after_submit"))
 
         except Exception as e:
             return str(e)
 
-    # Return an error message if the request method is not POST
+    
     return "Report submission failed."
 
-
-        
-        
-
-        
-
-
-         
-            
+     
         
 @app.route("/AddStudApply.html")
 def add_apply_form():
@@ -350,13 +342,48 @@ def add_apply():
         major = request.form["inStudMajor"]
         start_date = request.form["inStudStartDate"]
         end_date = request.form["inStudEndDate"]
+        resume_file = request.files["inStudResume"]
         
-        new_report = Report(application_id=application_id, company_id=company_id, position_id=position_id, 
-            student_id=student_id, name=name, phone_number=phone_number, email=email, major=major, start_date=start_date, end_date=end_date)
-        db.session.add(new_report)
-        db.session.commit()
+        if resume_file.filename == "":
+            return "Please select a file"
 
-        return redirect(url_for("after_submit"))
+        try:
+            new_apply = StudentApplication(application_id=application_id, company_id=company_id, position_id=position_id, 
+            student_id=student_id, name=name, phone_number=phone_number, email=email, major=major, start_date=start_date, end_date=end_date)
+            db.session.add(new_apply)
+            db.session.commit()
+
+            
+            resume_name_in_s3 = f"{student_id}_Resume"
+            s3 = boto3.resource('s3')
+
+            print("Data inserted in MySQL RDS... uploading report to S3...")
+            s3.Bucket(custombucket).put_object(Key=resume_name_in_s3, Body=resume_file)
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+            s3_location = (bucket_location['LocationConstraint'])
+
+            if s3_location is None:
+                s3_location = ''
+            else:
+                s3_location = '-' + s3_location
+
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                resume_name_in_s3)
+
+            
+            return redirect(url_for("after_submit"))
+
+        except Exception as e:
+            return str(e)
+
+    
+    return "Application submission failed."
+        
+        
+
+        
 
 @app.route("/AfterSubmit.html")
 def after_submit():
