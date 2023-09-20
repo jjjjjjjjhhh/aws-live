@@ -1,12 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, String, String, Date, Integer
-import config
+import os
+import boto3
+#from sqlalchemy import Column, String, String, Date, Integer
+
+from config import *
+
+
+bucket = custombucket
+region = customregion
 
 app = Flask(__name__)
 
-# Configure your MariaDB database
-app.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URI
+
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 db = SQLAlchemy(app)
 
 #routes
@@ -40,23 +47,23 @@ def adminStud():
 def AfterSubmit():
     return render_template('AfterSubmit.html')
 
-@app.route("/job-details-1.html")
+@app.route("/job-detail-1.html")
 def jobdetail1():
     return render_template('job-detail-1.html')
 
-@app.route("/job-details-2.html")
+@app.route("/job-detail-2.html")
 def jobdetail2():
     return render_template('job-detail-2.html')
 
-@app.route("/job-details-3.html")
+@app.route("/job-detail-3.html")
 def jobdetail3():
     return render_template('job-detail-3.html')
 
-@app.route("/job-details-4.html")
+@app.route("/job-detail-4.html")
 def jobdetail4():
     return render_template('job-detail-4.html')
 
-@app.route("/job-details-5.html")
+@app.route("/job-detail-5.html")
 def jobdetail5():
     return render_template('job-detail-5.html')
 
@@ -148,7 +155,7 @@ class Evaluation(db.Model):
     feedback = db.Column(db.String(255), nullable=False)
 
 
-
+#retrive data
 @app.route('/GetComOutput.html')
 def GetComOutput():
    
@@ -197,6 +204,34 @@ def GetStudOutput():
     students = Student.query.all()
     
     return render_template('GetStudOutput.html', students=students)
+
+
+#store data
+
+@app.route("/AddCom.html")
+def add_com_form():
+    return render_template("AddCom.html")
+
+@app.route("/add_com", methods=["POST"])
+def add_com():
+    if request.method == "POST":
+        company_id = request.form["companyId"]
+        name = request.form["companyName"]
+        industry = request.form["companyIndustry"]
+        state = request.form["companyState"]
+        pic_name = request.form["contactName"]
+        pic_email = request.form["contactEmail"]
+        pic_phone_number = request.form["phoneNumber"]
+        
+        new_company = Company(company_id=company_id, name=name, industry=industry, state=state, pic_name=pic_name, pic_email=pic_email, pic_phone_number=pic_phone_number)
+        db.session.add(new_company)
+        db.session.commit()
+
+        return redirect(url_for("after_submit"))
+
+@app.route("/AfterSubmit.html")
+def after_submit():
+    return render_template("AfterSubmit.html")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
