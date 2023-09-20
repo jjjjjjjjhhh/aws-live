@@ -286,41 +286,43 @@ def add_report():
         submission_date = request.form["reportDate"]
         report_file = request.files["reportPDF"]
 
-        #cursor = db.session.cursor()
+        # cursor = db.session.cursor()
         if report_file.filename == "":
             return "Please select a file"
 
         try:
-
             new_report = Report(report_id=report_id, student_id=student_id, submission_date=submission_date)
             db.session.add(new_report)
             db.session.commit()
-            
-            # Uplaod image file in S3 #
-            report_name_in_s3 = str(student_id) + "_Report"
+
+            # Upload the report file to S3
+            report_name_in_s3 = f"{student_id}_Report"
             s3 = boto3.resource('s3')
 
-            try:
-                print("Data inserted in MySQL RDS... uploading report to S3...")
-                s3.Bucket(custombucket).put_object(Key=report_name_in_s3, Body=report_file)
-                bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-                s3_location = (bucket_location['LocationConstraint'])
+            print("Data inserted in MySQL RDS... uploading report to S3...")
+            s3.Bucket(custombucket).put_object(Key=report_name_in_s3, Body=report_file)
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+            s3_location = (bucket_location['LocationConstraint'])
 
-                if s3_location is None:
-                    s3_location = ''
-                else:
-                    s3_location = '-' + s3_location
+            if s3_location is None:
+                s3_location = ''
+            else:
+                s3_location = '-' + s3_location
 
-                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                    s3_location,
-                    custombucket,
-                    report_name_in_s3)
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                report_name_in_s3)
 
-            except Exception as e:
-                return str(e)
-
-        finally:
+            # Return the redirect here, outside of the try block
             return redirect(url_for("after_submit"))
+
+        except Exception as e:
+            return str(e)
+
+    # Return an error message if the request method is not POST
+    return "Report submission failed."
+
 
         
         
