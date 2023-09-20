@@ -15,6 +15,10 @@ db = SQLAlchemy(app)
 def index():
     return render_template('index.html')
 
+@app.route("/")
+def index():
+    return render_template('index.html')
+
 @app.route("/admin.html")
 def admin():
     return render_template('admin.html')
@@ -104,43 +108,43 @@ class Student(db.Model):
     __tablename__ = 'Student'
     __table_args__ = {'schema': 'employee'} 
 
-    student_id = Column(String(5), primary_key=True)
-    name = Column(String(50), nullable=False)
-    phone_number = Column(String(12), nullable=False)
-    email = Column(String(50), nullable=False)
-    company = Column(String(50), nullable=False)
-    position = Column(String(50), nullable=False)
-    start_date = Column(String(50), nullable=False)
-    end_date = Column(String(50), nullable=False)
+    student_id = db.Column(db.String(5), primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    phone_number = db.Column(db.String(12), nullable=False)
+    email = db.Column(db.String(50), nullable=False)
+    company = db.Column(db.String(50), nullable=False)
+    position = db.Column(db.String(50), nullable=False)
+    start_date = db.Column(db.String(50), nullable=False)
+    end_date = db.Column(db.String(50), nullable=False)
 
 
 class Lecturer(db.Model):
     __tablename__ = 'Lecturer'
     __table_args__ = {'schema': 'employee'} 
 
-    lecturer_id = Column(String(4), primary_key=True)
-    name = Column(String(50), nullable=False)
-    email = Column(String(50), nullable=False)
-    phone_number = Column(String(12), nullable=False)
-    specialisation = Column(String(50), nullable=False)
+    lecturer_id = db.Column(db.String(4), primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(50), nullable=False)
+    phone_number = db.Column(db.String(12), nullable=False)
+    specialisation = db.Column(db.String(50), nullable=False)
   
 class Report(db.Model):
     __tablename__ = 'Report'
     __table_args__ = {'schema': 'employee'} 
 
-    report_id = Column(String(5), primary_key=True)
-    student_id = Column(String(5), nullable=False)
-    submission_date = Column(Date, nullable=False)
+    report_id = db.Column(db.String(5), primary_key=True)
+    student_id = db.Column(db.String(5), nullable=False)
+    submission_date = db.Column(db.Date, nullable=False)
 
 class Evaluation(db.Model):
     __tablename__ = 'Evaluation'
     __table_args__ = {'schema': 'employee'} 
 
-    evaluation_id = Column(String(5), primary_key=True)
-    lecturer_id = Column(String(4), nullable=False)
-    report_id = Column(String(5),  nullable=False)
-    score = Column(Integer, nullable=False)
-    feedback = Column(String(255), nullable=False)
+    evaluation_id = db.Column(db.String(5), primary_key=True)
+    lecturer_id = db.Column(db.String(4), nullable=False)
+    report_id = db.Column(db.String(5),  nullable=False)
+    score = db.Column(db.Integer, nullable=False)
+    feedback = db.Column(db.String(255), nullable=False)
 
 
 
