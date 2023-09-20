@@ -83,7 +83,7 @@
             <!-- Report-->
             <div class="container-xxl bg-white p-0">
                 <h1 class="text-center mt-4">Internship Report Submission</h1>
-                <form action="/company-contact" method="POST">
+                <form action="/add_report" method="POST">
                     <h3 class="mt-4">Your report will be evaluated by your lecturer</h3>
 
                     <!-- Report Id -->
@@ -111,25 +111,15 @@
                         <input type="file" class="form-control" id="reportPDF" name="reportPDF" required>
                     </div>
 
+
+                    <input type="submit" class="btn btn-primary" value="Submit Report">
+
                     
 
         
 
                 </form>
-                <!-- Submit Button -->
-                <button id="addReportButton" class="btn btn-primary">Submit Report</button>
-
-
-                    <script>
-                        // Add a click event listener to the button
-                        document.getElementById('addReportButton').addEventListener('click', function () {
-                            // Specify the URL to which you want to redirect
-                            var redirectTo = 'AfterSubmit.html';
-
-                            // Redirect the user to the specified URL
-                            window.location.href = redirectTo;
-                        });
-                    </script>
+               
 
             </div>
             <!-- End of Company Page Content -->

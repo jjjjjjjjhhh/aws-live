@@ -83,7 +83,7 @@
             <!-- Report-->
             <div class="container-xxl bg-white p-0">
                 <h1 class="text-center mt-4">Internship Report Evaluation</h1>
-                <form action="/company-contact" method="POST">
+                <form action="/add_score" method="POST">
                     <h3 class="mt-4">You can evaluate students' report here</h3>
 
 
@@ -119,23 +119,16 @@
                         <input type="text" class="form-control" id="inScoreFeed" name="inScoreFeed" required>
                     </div>
 
+
+                    <input type="submit" class="btn btn-primary" value="Submit Evaluation">
+
         
 
                 </form>
                 <!-- Submit Button -->
-                <button id="addScoreButton" class="btn btn-primary">Submit Evaluation</button>
+               
 
 
-                    <script>
-                        // Add a click event listener to the button
-                        document.getElementById('addScoreButton').addEventListener('click', function () {
-                            // Specify the URL to which you want to redirect
-                            var redirectTo = 'AfterSubmit.html';
-
-                            // Redirect the user to the specified URL
-                            window.location.href = redirectTo;
-                        });
-                    </script>
 
 
                     

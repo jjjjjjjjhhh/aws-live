@@ -97,7 +97,7 @@
             <!-- Student Page Content -->
             <div class="container-xxl bg-white p-0">
                 <h1 class="text-center mt-4">Student Registeration</h1>
-                <form action="/company-contact" method="POST">
+                <form action="/add_apply" method="POST">
                     <h3 class="mt-4">Apply for Internship</h3>
 
                     <!-- Application ID -->
@@ -195,23 +195,11 @@
                         <input type="file" class="form-control" id="inStudResume" name="inStudResume" required>
                     </div>
 
+                    <input type="submit" class="btn btn-primary" value="Submit Application">
+
                 </form>
 
-                <!-- Submit Button -->
-                <button id="addStudButton" class="btn btn-primary">Submit Application</button>
-
-
-                    <script>
-                        // Add a click event listener to the button
-                        document.getElementById('addStudButton').addEventListener('click', function () {
-                            // Specify the URL to which you want to redirect
-                            var redirectTo = 'AfterSubmit.html';
-
-                            // Redirect the user to the specified URL
-                            window.location.href = redirectTo;
-                        });
-                    </script>
-
+               
             </div>
             <!-- End of Company Page Content -->
 

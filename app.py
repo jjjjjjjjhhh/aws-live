@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_s3 import FlaskS3
 from flask_sqlalchemy import SQLAlchemy
 import os
 import boto3
@@ -14,7 +15,11 @@ app = Flask(__name__)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
+app.config['FLASKS3_BUCKET_NAME'] = custombucket
+app.config['FLASKS3_REGION'] = customregion
 db = SQLAlchemy(app)
+
+s3 = FlaskS3(app)
 
 #routes
 
@@ -244,6 +249,84 @@ def add_pos():
         
         new_position = PositionTable(position_id=position_id, company_id=company_id, position=position, job_desc=job_desc, allowance=allowance)
         db.session.add(new_position)
+        db.session.commit()
+
+        return redirect(url_for("after_submit"))
+
+@app.route("/AddScore.html")
+def add_score_form():
+    return render_template("AddScore.html")
+
+@app.route("/add_score", methods=["POST"])
+def add_score():
+    if request.method == "POST":
+        evaluation_id = request.form["inScoreEvaId"]
+        lecturer_id = request.form["inScoreLecId"]
+        report_id = request.form["inScoreReportId"]
+        score = request.form["inScoreScore"]
+        feedback = request.form["inScoreFeed"]
+        
+        new_score = Evaluation(evaluation_id=evaluation_id, lecturer_id=lecturer_id, report_id=report_id, score=score, feedback=feedback)
+        db.session.add(new_score)
+        db.session.commit()
+
+        return redirect(url_for("after_submit"))
+
+
+@app.route("/AddReport.html")
+def add_report_form():
+    return render_template("AddReport.html")
+
+@app.route("/add_report", methods=["POST"])
+def add_report():
+    if request.method == "POST":
+        report_id = request.form["reportId"]
+        student_id = request.form["reportStudId"]
+        submission_date = request.form["reportDate"]
+        resume_file = request.files["inStudResume"]
+
+        if report_id and student_id and submission_date and resume_file:
+            
+            new_resume_name = f"{student_id}_Resume.pdf"  
+
+         
+            s3.upload_fileobj(
+                resume_file,
+                app.config['FLASKS3_BUCKET_NAME'],
+                new_resume_name,
+                ExtraArgs={
+                    'ACL': 'public-read',
+                    'ContentType': resume_file.content_type
+                }
+            )
+        
+        new_report = Report(report_id=report_id, student_id=student_id, submission_date=submission_date)
+        db.session.add(new_report)
+        db.session.commit()
+
+        return redirect(url_for("after_submit"))
+
+@app.route("/AddStudApply.html")
+def add_apply_form():
+    return render_template("AddStudApply.html")
+
+@app.route("/add_apply", methods=["POST"])
+def add_apply():
+    if request.method == "POST":
+        application_id = request.form["inStudApplyID"]
+        company_id = request.form["inStudComID"]
+        position_id = request.form["inStudPosID"]
+        student_id = request.form["inStudStuID"]
+        name = request.form["inStudName"]
+        phone_number = request.form["inStudPhoneNumber"]
+        email = request.form["inStudEmail"]
+        major = request.form["inStudMajor"]
+        start_date = request.form["inStudStartDate"]
+        end_date = request.form["inStudEndDate"]
+        
+        new_report = Report(application_id=application_id, company_id=company_id, position_id=position_id, 
+            student_id=student_id, name=name, phone_number=phone_number, email=email, major=major, start_date=start_date, end_date=end_date)
+        db.session.add(new_report)
         db.session.commit()
 
         return redirect(url_for("after_submit"))
