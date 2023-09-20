@@ -227,6 +227,25 @@ def add_com():
         db.session.add(new_company)
         db.session.commit()
 
+        return redirect(url_for("add_pos_form"))
+
+@app.route("/AddPos.html")
+def add_pos_form():
+    return render_template("AddPos.html")
+
+@app.route("/add_pos", methods=["POST"])
+def add_pos():
+    if request.method == "POST":
+        position_id = request.form["posId"]
+        company_id = request.form["posComId"]
+        position = request.form["posName"]
+        job_desc = request.form["jobDesc"]
+        allowance = request.form["jobPay"]
+        
+        new_position = PositionTable(position_id=position_id, company_id=company_id, position=position, job_desc=job_desc, allowance=allowance)
+        db.session.add(new_position)
+        db.session.commit()
+
         return redirect(url_for("after_submit"))
 
 @app.route("/AfterSubmit.html")
