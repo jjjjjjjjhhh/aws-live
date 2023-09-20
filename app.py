@@ -286,39 +286,47 @@ def add_report():
         submission_date = request.form["reportDate"]
         report_file = request.files["reportPDF"]
 
-        if report_id and student_id and submission_date and report_file:
-            
-            new_report_name = f"{student_id}_Report.pdf"  
+        #cursor = db.session.cursor()
+        if report_file.filename == "":
+            return "Please select a file"
 
-             
-            s3 = boto3.client(
-                's3',
-               
-                region_name=customregion
-            )
+        try:
+
+            new_report = Report(report_id=report_id, student_id=student_id, submission_date=submission_date)
+            db.session.add(new_report)
+            db.session.commit()
+            
+            # Uplaod image file in S3 #
+            report_name_in_s3 = str(student_id) + "_Report"
+            s3 = boto3.resource('s3')
 
             try:
-                s3.upload_fileobj(
-                    report_file,
+                print("Data inserted in MySQL RDS... uploading report to S3...")
+                s3.Bucket(custombucket).put_object(Key=report_name_in_s3, Body=report_file)
+                bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+                s3_location = (bucket_location['LocationConstraint'])
+
+                if s3_location is None:
+                    s3_location = ''
+                else:
+                    s3_location = '-' + s3_location
+
+                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                    s3_location,
                     custombucket,
-                    new_report_name,
-                    ExtraArgs={
-                        'ACL': 'public-read',
-                        'ContentType': report_file.content_type
-                    }
-                )
+                    report_name_in_s3)
 
-                
-                new_report = Report(report_id=report_id, student_id=student_id, submission_date=submission_date)
-                db.session.add(new_report)
-                db.session.commit()
+            except Exception as e:
+                return str(e)
 
-                return redirect(url_for("after_submit"))
+        finally:
+            return redirect(url_for("after_submit"))
 
-            except NoCredentialsError:
-                return "S3 credentials not available. Please configure AWS credentials."
+        
+        
 
-    return "Report submission failed."
+        
+
 
          
             
