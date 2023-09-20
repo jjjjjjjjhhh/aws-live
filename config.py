@@ -2,7 +2,7 @@ customhost = "database-1.cnxqluhsvyup.us-east-1.rds.amazonaws.com"
 customuser = "aws_user"
 custompass = "Bait3273"
 customdb = "employee"
-custombucket = "natalie-website"
+custombucket = "natalietanjieyin-bucket"
 customregion = "us-east-1"
 dbport = "3306"
 
