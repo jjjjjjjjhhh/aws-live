@@ -408,12 +408,12 @@ def search_student():
         if request.form.get("searchDelete"):
             return redirect(url_for("confirm_delete", student_id=student.student_id))
 
-    return render_template("displayStudent.html", student=student)
+    return render_template("displayStudent.html", student_id=student.student_id)
 
 @app.route("/displayStudent.html")
-def display_student():
+def display_student(student_id):
     
-    student = request.args.get("student")
+    student = Student.query.get(student_id)
     if not student:
         flash("Student not found. Please enter a valid student ID.")
         return redirect(url_for("search_student")) 
