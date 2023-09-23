@@ -430,7 +430,7 @@ def display_student():
         return redirect(url_for("confirm_delete", student_id=student.student_id))
 
 
-    return render_template("displayStudent.html")
+    return render_template("displayStudent.html", student=student)
 
 
 
