@@ -386,7 +386,9 @@ def add_apply():
 
 @app.route("/modifyOrDelete.html" , methods=["GET", "POST"])
 def search_student():
-    student_id = request.form["searchStudId"]
+
+    if request.method == "POST":
+        student_id = request.form["searchStudId"]
        
     
         
