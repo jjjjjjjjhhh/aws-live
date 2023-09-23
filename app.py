@@ -415,6 +415,7 @@ def search_student():
 @app.route("/displayStudent.html/<string:student_id>")
 def display_student(student_id):
     
+    student_id = request.args.get("student_id")
     print("Student ID entered:", student_id)
     student = Student.query.get(student_id)
     if not student:
