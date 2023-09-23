@@ -387,7 +387,7 @@ def add_apply():
 @app.route("/modifyOrDelete.html" , methods=["GET", "POST"])
 def search_student():
 
-    student = Student.query.get(student_id)
+   
     if request.method == "POST":
 
         
@@ -408,11 +408,11 @@ def search_student():
         if request.form.get("searchDelete"):
             return redirect(url_for("confirm_delete", student_id=student.student_id))
 
-    return render_template("modifyOrDelete.html", student=student)
+    return render_template("displayStudent.html", student=student)
 
 @app.route("/displayStudent.html")
-def display_student(student_id):
-    student = Student.query.get(student_id)
+def display_student(student):
+    
 
     if not student:
         flash("Student not found. Please enter a valid student ID.")
