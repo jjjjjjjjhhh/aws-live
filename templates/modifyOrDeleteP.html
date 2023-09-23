@@ -4,7 +4,7 @@
 <head>
     <center>
         <meta charset="utf-8">
-        <title>Are you sure?</title>
+        <title>Modify Position Record</title>
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,13 +24,15 @@
 
         <!-- Template Stylesheet -->
         <link href="../static/css/style.css" rel="stylesheet">
+
+        
     </center>
 </head>
 
 <body>
     <center>
         <div class="container-xxl bg-white p-0">
-            <!-- Navbar Start -->
+           <!-- Navbar Start -->
        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
             <h1 class="m-0 text-primary">TARUMT Student Internship</h1>
@@ -54,7 +56,7 @@
                     <div class="dropdown-menu" aria-labelledby="studentDropdown">
                         <a class="dropdown-item" href="AddStudApply.html">Internship Application</a> <a class="dropdown-item" href="AddReport.html">Submit Internship Report</a>
 
-                  
+                        
                         <a class="dropdown-item" href="GetScoreOutput.html">View Score</a>
                     </div>
                 </li>
@@ -70,28 +72,36 @@
    
     <!-- Navbar End -->
 
-
             <!-- Header End -->
             <div class="container-xxl py-5 bg-dark page-header mb-5">
                 <div class="container my-5 pt-5 pb-4">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown" style="text-align: left;">Reconfirm</h1>
-                   
+                    <h1 class="display-3 text-white mb-3 animated slideInDown" style="text-align: left;">Modify Position Record</h1>
+                    
                 </div>
             </div>
             <!-- Header End -->
 
-            <!-- Company Page Content -->
+            <!-- Report-->
             <div class="container-xxl bg-white p-0">
-                <h1 class="text-center mt-4">Are you sure you want to delete the student record for {{ lecturer.lecturer_id }}?</h1>
-                <h3 class="mt-4">This action cannot be undone</h3>
-                <form action="{{ url_for('confirm_delete_lecturer', lecturer_id=lecturer.lecturer_id) }}" method="POST">
-                    <input type="submit" class="btn btn-primary" value="Yes, Delete">
+                <h1 class="text-center mt-4">Modify Position Record</h1>
+                <form method="POST" enctype="multipart/form-data">
+                    <h3 class="mt-4">Please enter the Position ID for the position record you want to modify</h3>
+
+                    <!-- Position Id -->
+                    <div class="mb-3">
+                        <label for="searchPosId" class="form-label" style="margin-top: 20px;">Position ID</label>
+                        <input type="text" class="form-control" id="searchPosId" name="searchPosId" required>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Search">
+
                 </form>
-                
-                    
+               
 
             </div>
-            <!-- End of Company Page Content -->
+
+            
+           
 
             <!-- Footer Start -->
             <div class="container">
@@ -136,6 +146,8 @@
                 }
             });
         </script>
+
+        
     </center>
 
 </body>

@@ -4,7 +4,7 @@
 <head>
     <center>
         <meta charset="utf-8">
-        <title>Company Registeration</title>
+        <title>Modify Company</title>
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
 <body>
     <center>
         <div class="container-xxl bg-white p-0">
-            <!-- Navbar Start -->
+           <!-- Navbar Start -->
        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
             <h1 class="m-0 text-primary">TARUMT Student Internship</h1>
@@ -56,12 +56,12 @@
                     <div class="dropdown-menu" aria-labelledby="studentDropdown">
                         <a class="dropdown-item" href="AddStudApply.html">Internship Application</a> <a class="dropdown-item" href="AddReport.html">Submit Internship Report</a>
 
-                  
+                        
                         <a class="dropdown-item" href="GetScoreOutput.html">View Score</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="GetComOutput.html" class="nav-link">Add Company</a>
+                    <a href="GetComOutput.html" class="nav-link">Company</a>
                 </li>
                 <li class="nav-item">
                     <a href="portfolio.html" class="nav-link">Portfolio</a>
@@ -81,29 +81,24 @@
             </div>
             <!-- Header End -->
 
-            <!-- Company Page Content -->
+            <!-- Report-->
             <div class="container-xxl bg-white p-0">
-                <h1 class="text-center mt-4">Company Registeration</h1>
-                <form action="/add_com" method="POST">
-                    <h3 class="mt-4">Please enter the details of the company</h3>
+                <h1 class="text-center mt-4">Modify Company Record</h1>
+                <form  action="{{ url_for('modify_company', company_id=company.company_id) }}" method="POST" enctype="multipart/form-data">
+                    <h3 class="mt-4">Please update the company information</h3>
 
-                    <!-- Company Id -->
+                    <!-- Name -->
                     <div class="mb-3">
-                        <label for="companyId" class="form-label" style="margin-top: 20px;">Company Id</label>
-                        <input type="text" class="form-control" id="companyId" name="companyId" required>
+                        <label for="modifyComName" class="form-label">Name</label>
+                        <input type="text" value="{{ company.name }}" class="form-control" id="modifyComName" name="modifyComName">
                     </div>
 
-                    <!-- Company Name -->
-                    <div class="mb-3">
-                        <label for="companyName" class="form-label" style="margin-top: 20px;">Company Name</label>
-                        <input type="text" class="form-control" id="companyName" name="companyName" required>
-                    </div>
 
-                    <!-- Company Industry -->
+                    <!-- industry -->
                     <div class="mb-3">
-                        <label for="companyIndustry" class="form-label" style="margin-top: 20px;">Company Industry</label>
-                        <select class="form-select" id="companyIndustry" name="companyIndustry" required>
-                            <option value="" disabled selected>Please select your company industry</option>
+                        <label for="modifyComIndus" class="form-label">Industry</label>
+                        <select class="form-select" value="{{ company.industry }}" id="modifyComIndus" name="modifyComIndus" >
+                        
                             <option value="Information Technology">Information Technology</option>
                             <option value="Healthcare">Healthcare</option>
                             <option value="Finance">Finance</option>
@@ -121,13 +116,13 @@
                             <option value="Pharmaceuticals">Pharmaceuticals</option>
                         </select>
                     </div>
-                    
 
-                    <!-- Company State -->
+
+                    <!-- state -->
                     <div class="mb-3">
-                        <label for="companyState" class="form-label" style="margin-top: 20px;">State</label>
-                        <select class="form-select" id="companyState" name="companyState" required>
-                            <option value="" disabled selected>Please select your company state</option>
+                        <label for="modifyComState" class="form-label">State</label>
+                        <select class="form-select" value="{{ company.state }}" id="modifyComState" name="modifyComState" >
+                            
                             <option value="Johor">Johor</option>
                             <option value="Kedah">Kedah</option>
                             <option value="Kelantan">Kelantan</option>
@@ -146,33 +141,43 @@
                             <option value="Wilayah Persekutuan Putrajaya">Wilayah Persekutuan Putrajaya</option>
                         </select>
                     </div>
-                    
 
-                    <!-- Contact Person's Name -->
+
+                    <!-- name -->
                     <div class="mb-3">
-                        <label for="contactName" class="form-label">Contact Person's Name</label>
-                        <input type="text" class="form-control" id="contactName" name="contactName" required>
+                        <label for="modifyComPicName" class="form-label">Contact Name</label>
+                        <input type="text" value="{{ company.pic_name }}" class="form-control" id="modifyComPicName" name="modifyComPicName" >
                     </div>
 
                     <!-- Email Address -->
                     <div class="mb-3">
-                        <label for="contactEmail" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
+                        <label for="modifyComEmail" class="form-label">Email Address</label>
+                        <input type="email" value="{{ company.pic_email }}" class="form-control" id="modifyComEmail" name="modifyComEmail" >
                     </div>
 
-                    <!-- Phone Number -->
+                    <!-- phone -->
                     <div class="mb-3">
-                        <label for="phoneNumber" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                        <label for="modifyComPhone" class="form-label">Phone Number</label>
+                        <input type="number" value="{{ company.pic_phone_number }}" class="form-control" id="modifyComPhone" name="modifyComPhone">
                     </div>
 
 
-                    <input type="submit" class="btn btn-primary" value="Submit Company Details">
+        
+
+                    
+                    
 
 
+
+                    <input type="submit" class="btn btn-primary" value="Confirm Modification">
+
+                    
+
+        
 
                 </form>
-                
+               
+
             </div>
             <!-- End of Company Page Content -->
 

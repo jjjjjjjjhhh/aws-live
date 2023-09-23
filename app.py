@@ -533,8 +533,142 @@ def confirm_delete_lecturer(lecturer_id):
     return render_template("confirmDeleteLec.html", lecturer=lecturer)
 
 
+@app.route("/modifyOrDeleteC.html" , methods=["GET", "POST"])
+def search_company():
+
+   
+    if request.method == "POST":
 
         
+        company_id = request.form["searchComId"]
+        print("Company ID entered:", company_id)
+        company = Company.query.get(company_id)
+
+        return redirect(url_for("display_company", company_id=company.company_id))
+        
+
+
+    return render_template("modifyOrDeleteC.html")
+
+@app.route("/modifyOrDeleteP.html" , methods=["GET", "POST"])
+def search_position():
+
+   
+    if request.method == "POST":
+
+        
+        position_id = request.form["searchPosId"]
+        print("position ID entered:", position_id)
+        position = PositionTable.query.get(position_id)
+
+        return redirect(url_for("display_position", position_id=position.position_id))
+        
+
+
+    return render_template("modifyOrDeleteP.html")
+
+@app.route("/displayCompany.html", methods=["GET", "POST"])
+def display_company():
+    
+    company_id = request.args.get("company_id")
+    print("company ID entered:", company_id)
+    company = Company.query.get(company_id)
+    if not company:
+        flash("company not found. Please enter a valid company ID.")
+        return redirect(url_for("search_company")) 
+
+    if request.form.get("searchModifyC"):
+        return redirect(url_for("modify_company", company_id=company.company_id))
+
+        
+    if request.form.get("searchDeleteC"):
+        return redirect(url_for("confirm_delete_company", company_id=company.company_id))
+
+
+    return render_template("displayCompany.html", company=company)
+
+
+@app.route("/displayPosition.html", methods=["GET", "POST"])
+def display_position():
+    
+    position_id = request.args.get("position_id")
+    print("position ID entered:", position_id)
+    position = PositionTable.query.get(position_id)
+    if not position:
+        flash("position not found. Please enter a valid position ID.")
+        return redirect(url_for("search_position")) 
+
+    if request.form.get("searchModifyP"):
+        return redirect(url_for("modify_position", position_id=position.position_id))
+
+        
+    if request.form.get("searchDeleteP"):
+        return redirect(url_for("confirm_delete_position", position_id=position.position_id))
+
+
+    return render_template("displayPosition.html", position=position)
+
+
+
+@app.route("/ModifyCompany.html/<string:company_id>", methods=["GET", "POST"])
+def modify_company(company_id):
+    company = Company.query.get(company_id)
+    if request.method == "POST":
+        
+        company.name = request.form.get("modifyComName", company.name)
+        company.industry = request.form.get("modifyComIndus", company.industry)
+        company.state = request.form.get("modifyComState", company.state)
+        company.pic_name = request.form.get("modifyComPicName", company.pic_name)
+        company.pic_email = request.form.get("modifyComEmail", company.pic_email)
+        company.pic_phone_number = request.form.get("modifyComPhone", company.pic_phone_number)
+        
+        db.session.commit()
+        
+        return redirect(url_for("after_submit"))
+
+    return render_template("ModifyCompany.html",company=company)
+
+@app.route("/ModifyPosition.html/<string:position_id>", methods=["GET", "POST"])
+def modify_position(position_id):
+    position = PositionTable.query.get(position_id)
+    if request.method == "POST":
+        
+        position.position = request.form.get("modifyPosName", position.position)
+        position.job_desc = request.form.get("modifyPosJob", position.job_desc)
+        position.allowance = request.form.get("modifyPosPay", position.allowance)
+        
+        
+        db.session.commit()
+        
+        return redirect(url_for("after_submit"))
+
+    return render_template("ModifyPosition.html",position=position)
+
+   
+
+@app.route("/confirmDeleteCom.html/<string:company_id>", methods=["GET", "POST"])
+def confirm_delete_company(company_id):
+    company = Company.query.get(company_id)
+    
+    if request.method == "POST":
+       
+        db.session.delete(company)
+        db.session.commit()
+        return redirect(url_for("after_submit"))
+
+    return render_template("confirmDeleteCom.html", company=company)
+
+@app.route("/confirmDeletePos.html/<string:position_id>", methods=["GET", "POST"])
+def confirm_delete_position(position_id):
+    position = PositionTable.query.get(position_id)
+    
+    if request.method == "POST":
+       
+        db.session.delete(position)
+        db.session.commit()
+        return redirect(url_for("after_submit"))
+
+    return render_template("confirmDeletePos.html", position=position)        
 
         
 

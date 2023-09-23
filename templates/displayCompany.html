@@ -4,7 +4,7 @@
 <head>
     <center>
         <meta charset="utf-8">
-        <title>Are you sure?</title>
+        <title>Display Company Record</title>
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,13 +24,15 @@
 
         <!-- Template Stylesheet -->
         <link href="../static/css/style.css" rel="stylesheet">
+
+        
     </center>
 </head>
 
 <body>
     <center>
         <div class="container-xxl bg-white p-0">
-            <!-- Navbar Start -->
+           <!-- Navbar Start -->
        <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
             <h1 class="m-0 text-primary">TARUMT Student Internship</h1>
@@ -54,7 +56,7 @@
                     <div class="dropdown-menu" aria-labelledby="studentDropdown">
                         <a class="dropdown-item" href="AddStudApply.html">Internship Application</a> <a class="dropdown-item" href="AddReport.html">Submit Internship Report</a>
 
-                  
+                        
                         <a class="dropdown-item" href="GetScoreOutput.html">View Score</a>
                     </div>
                 </li>
@@ -70,28 +72,62 @@
    
     <!-- Navbar End -->
 
-
             <!-- Header End -->
             <div class="container-xxl py-5 bg-dark page-header mb-5">
                 <div class="container my-5 pt-5 pb-4">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown" style="text-align: left;">Reconfirm</h1>
-                   
+                    <h1 class="display-3 text-white mb-3 animated slideInDown" style="text-align: left;">Display Company Record</h1>
+                    
                 </div>
             </div>
             <!-- Header End -->
 
-            <!-- Company Page Content -->
-            <div class="container-xxl bg-white p-0">
-                <h1 class="text-center mt-4">Are you sure you want to delete the student record for {{ lecturer.lecturer_id }}?</h1>
-                <h3 class="mt-4">This action cannot be undone</h3>
-                <form action="{{ url_for('confirm_delete_lecturer', lecturer_id=lecturer.lecturer_id) }}" method="POST">
-                    <input type="submit" class="btn btn-primary" value="Yes, Delete">
-                </form>
-                
-                    
+            
 
+            {% if company %}
+
+            <div class="text-center">
+                <h1 class="text-center mt-4">Company Record</h1>
             </div>
-            <!-- End of Company Page Content -->
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Company ID</th>
+                        <th>Company Name</th>
+                        <th>Industry</th>
+                        <th>State</th>
+                        <th>PIC Name</th>
+                        <th>PIC Email</th>
+                        <th>PIC Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>{{ company.company_id }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.industry }}</td>
+                        <td>{{ company.state}}</td>
+                        <td>{{ company.pic_name }}</td>
+                        <td>{{ company.pic_email }}</td>
+                        <td>{{ company.pic_phone_number }}</td>  
+                    	
+                    </tr>
+                    
+                </tbody>
+
+                 
+            </table>
+
+            
+
+            {% endif %} 
+
+            <form method="POST">
+                <input type="submit" class="btn btn-primary" name="searchModifyC" value="Modify">
+                <input type="submit" class="btn btn-primary" name="searchDeleteC" value="Delete">
+            </form> 
+
+            
 
             <!-- Footer Start -->
             <div class="container">
@@ -136,6 +172,8 @@
                 }
             });
         </script>
+
+        
     </center>
 
 </body>
