@@ -467,7 +467,7 @@ def confirm_delete(student_id):
         db.session.commit()
         return redirect(url_for("after_submit"))
 
-    return render_template("confirm_delete.html", student=student)
+    return render_template("confirmDeleteStud.html", student=student)
 
 
 
