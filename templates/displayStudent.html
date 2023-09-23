@@ -4,7 +4,7 @@
 <head>
     <center>
         <meta charset="utf-8">
-        <title>Modify Student Record</title>
+        <title>Display Student Record</title>
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,7 +75,7 @@
             <!-- Header End -->
             <div class="container-xxl py-5 bg-dark page-header mb-5">
                 <div class="container my-5 pt-5 pb-4">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown" style="text-align: left;">Modify Student Record</h1>
+                    <h1 class="display-3 text-white mb-3 animated slideInDown" style="text-align: left;">Display Student Record</h1>
                     
                 </div>
             </div>
@@ -83,7 +83,7 @@
 
             
 
-            {% if student %}
+            
 
             <div class="text-center">
                 <h1 class="text-center mt-4">Student Record</h1>
@@ -125,8 +125,7 @@
                 <input type="submit" class="btn btn-primary" name="searchDelete" value="Delete" onclick="return confirm('Are you sure you want to delete this student record?')">
             </form> 
 
-            {% endif %}  
-           
+            
 
             <!-- Footer Start -->
             <div class="container">
