@@ -384,11 +384,7 @@ def add_apply():
         
 #update and delete
 
-@app.route("/modifyOrDelete.html")
-def modify_or_delete_stud():
-    return render_template("modifyOrDelete.html")
-
-@app.route("/search_student", methods=["GET", "POST"])
+@app.route("/modifyOrDelete.html" , methods=["GET", "POST"])
 def search_student():
     if request.method == "POST":
         
@@ -408,6 +404,8 @@ def search_student():
             return redirect(url_for("confirm_delete", student_id=student.student_id))
 
     return render_template("modifyOrDelete.html")
+
+
 
 
 
