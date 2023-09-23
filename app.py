@@ -455,10 +455,7 @@ def modify_student(student_id):
 
     return render_template("ModifyStudent.html", student=student)
 
-@app.route("/modify_student")
-def modify_student2():
-    
-    return render_template("AfterSubmit.html")
+
 
    
 

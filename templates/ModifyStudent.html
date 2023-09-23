@@ -84,7 +84,7 @@
             <!-- Report-->
             <div class="container-xxl bg-white p-0">
                 <h1 class="text-center mt-4">Modify Student Record</h1>
-                <form action="/modify_student" method="POST" enctype="multipart/form-data">
+                <form  action="{{ url_for('modify_student', student_id=student.student_id) }}" method="POST" enctype="multipart/form-data">
                     <h3 class="mt-4">Please update the student information</h3>
 
                     <!-- Name -->
@@ -133,7 +133,7 @@
                     </div>
 
 
-                    <input type="submit" class="btn btn-primary" value="confirm Modification">
+                    <input type="submit" class="btn btn-primary" value="Confirm Modification">
 
                     
 
