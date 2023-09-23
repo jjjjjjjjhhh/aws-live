@@ -412,7 +412,7 @@ def search_student():
 
     return render_template("modifyOrDelete.html")
 
-@app.route("/displayStudent.html")
+@app.route("/displayStudent.html", methods=["GET", "POST"])
 def display_student():
     
     student_id = request.args.get("student_id")
