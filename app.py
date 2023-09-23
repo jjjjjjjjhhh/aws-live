@@ -398,17 +398,6 @@ def search_student():
         return redirect(url_for("display_student", student_id=student.student_id))
         
 
-        if not student:
-            flash("Student not found. Please enter a valid student ID.")
-            return redirect(url_for("search_student"))
-
-       
-        if request.form.get("searchModify"):
-            return redirect(url_for("modify_student", student_id=student.student_id))
-
-        
-        if request.form.get("searchDelete"):
-            return redirect(url_for("confirm_delete", student_id=student.student_id))
 
     return render_template("modifyOrDelete.html")
 
@@ -457,8 +446,6 @@ def modify_student(student_id):
 
 
 
-   
-
 @app.route("/confirmDeleteStud.html/<string:student_id>", methods=["GET", "POST"])
 def confirm_delete(student_id):
     student = Student.query.get(student_id)
@@ -470,6 +457,81 @@ def confirm_delete(student_id):
         return redirect(url_for("after_submit"))
 
     return render_template("confirmDeleteStud.html", student=student)
+
+
+@app.route("/modifyOrDeleteL.html" , methods=["GET", "POST"])
+def search_lecturer():
+
+   
+    if request.method == "POST":
+
+        
+        lecturer_id = request.form["searchLecId"]
+        print("Lecturer ID entered:", lecturer_id)
+        lecturer = Lecturer.query.get(lecturer_id)
+
+        return redirect(url_for("display_lecturer", lecturer_id=lecturer.lecturer_id))
+        
+
+
+    return render_template("modifyOrDeleteL.html")
+
+@app.route("/displayLecturer.html", methods=["GET", "POST"])
+def display_lecturer():
+    
+    lecturer_id = request.args.get("lecturer_id")
+    print("lecturer ID entered:", lecturer_id)
+    lecturer = Lecturer.query.get(lecturer_id)
+    if not lecturer:
+        flash("Lecturer not found. Please enter a valid lecturer ID.")
+        return redirect(url_for("search_lecturer")) 
+
+    if request.form.get("searchModifyL"):
+        return redirect(url_for("modify_lecturer", lecturer_id=lecturer.lecturer_id))
+
+        
+    if request.form.get("searchDeleteL"):
+        return redirect(url_for("confirm_delete_lecturer", lecturer_id=lecturer.lecturer_id))
+
+
+    return render_template("displayLecturer.html", lecturer=lecturer)
+
+
+
+
+
+
+@app.route("/ModifyLecturer.html/<string:lecturer_id>", methods=["GET", "POST"])
+def modify_lecturer(lecturer_id):
+    lecturer = Lecturer.query.get(lecturer_id)
+    if request.method == "POST":
+        
+        lecturer.name = request.form.get("modifyLecName", lecturer.name)
+        lecturer.email = request.form.get("modifyLecEmail", lecturer.email)
+        lecturer.phone_number = request.form.get("modifyLecPhone", lecturer.phone_number)
+        lecturer.company = request.form.get("modifyLecCom", lecturer.company)
+        lecturer.specialisation = request.form.get("modifyLecDate", lecturer.specialisation)
+        db.session.commit()
+        
+        return redirect(url_for("after_submit"))
+
+    return render_template("ModifyLecturer.html",lecturer=lecturer)
+
+
+
+   
+
+@app.route("/confirmDeleteLec.html/<string:lecturer_id>", methods=["GET", "POST"])
+def confirm_delete_lecturer(lecturer_id):
+    lecturer = Lecturer.query.get(lecturer_id)
+    
+    if request.method == "POST":
+       
+        db.session.delete(lecturer)
+        db.session.commit()
+        return redirect(url_for("after_submit"))
+
+    return render_template("confirmDeleteLec.html", lecturer=lecturer)
 
 
 
