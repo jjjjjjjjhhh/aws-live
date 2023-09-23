@@ -1,3 +1,4 @@
+from curses import flash
 from flask import Flask, render_template, request, redirect, url_for
 from flask_s3 import FlaskS3
 from flask_sqlalchemy import SQLAlchemy
@@ -381,6 +382,60 @@ def add_apply():
     
     return "Application submission failed."
         
+#update and delete
+@app.route("/modifyOrDelete.html", methods=["GET", "POST"])
+def modify_or_delete():
+    if request.method == "POST":
+        
+        student_id = request.form["student_id"]
+        student = Student.query.get(student_id)
+
+        if not student:
+            flash("Student not found. Please enter a valid student ID.")
+            return redirect(url_for("modify_or_delete"))
+
+       
+        if request.form.get("modify"):
+            return redirect(url_for("modify_student", student_id=student.student_id))
+
+        
+        if request.form.get("delete"):
+            return redirect(url_for("confirm_delete", student_id=student.student_id))
+
+    return render_template("modifyOrDelete.html")
+
+
+@app.route("/ModifyStudent.html/<string:student_id>", methods=["GET", "POST"])
+def modify_student(student_id):
+    student = Student.query.get(student_id)
+    if request.method == "POST":
+        
+        student.name = request.form.get("modifyStudName", student.name)
+        student.phone_number = request.form.get("modifyStudPhone", student.phone_number)
+        student.email = request.form.get("modifyStudEmail", student.email)
+        student.company = request.form.get("modifyStudCom", student.company)
+        student.position = request.form.get("modifyStudPos", student.position)
+        student.start_date = request.form.get("modifyStudSDate", student.start_date)
+        student.end_date = request.form.get("modifyStudEDate", student.end_date)
+        db.session.commit()
+        flash("Student information updated successfully.")
+        return redirect(url_for("modify_or_delete"))
+
+    return render_template("ModifyStudent.html", student=student)
+
+@app.route("/confirmDeleteStud.html/<string:student_id>", methods=["GET", "POST"])
+def confirm_delete(student_id):
+    student = Student.query.get(student_id)
+    if request.method == "POST":
+        db.session.delete(student)
+        db.session.commit()
+        flash("Student information deleted successfully.")
+        return redirect(url_for("modify_or_delete"))
+
+    return render_template("confirm_delete.html", student=student)
+
+
+
         
 
         
