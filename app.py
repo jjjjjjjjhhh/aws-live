@@ -411,9 +411,9 @@ def search_student():
     return render_template("displayStudent.html", student=student)
 
 @app.route("/displayStudent.html")
-def display_student(student):
+def display_student():
     
-
+    student = request.args.get("student")
     if not student:
         flash("Student not found. Please enter a valid student ID.")
         return redirect(url_for("search_student")) 
