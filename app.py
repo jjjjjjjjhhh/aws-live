@@ -404,7 +404,7 @@ def search_student():
         if request.form.get("searchDelete"):
             return redirect(url_for("confirm_delete", student_id=student.student_id))
 
-    return render_template("showingOutputModifyOrDelete.html", student_id=student_id)
+    return render_template("showingOutputModifyOrDelete.html", student_id=student.student_id)
 
 
 @app.route("/showingOutputModifyOrDelete.html" , methods=["GET", "POST"])
