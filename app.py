@@ -465,8 +465,7 @@ def confirm_delete(student_id):
     if request.method == "POST":
         db.session.delete(student)
         db.session.commit()
-        flash("Student information deleted successfully.")
-        return redirect(url_for("modify_or_delete"))
+        return redirect(url_for("after_submit"))
 
     return render_template("confirm_delete.html", student=student)
 
