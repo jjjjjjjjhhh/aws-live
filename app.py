@@ -387,7 +387,7 @@ def add_apply():
 def search_student():
     if request.method == "POST":
         
-        student_id = request.form["student_id"]
+        student_id = request.form["searchStudId"]
         student = Student.query.get(student_id)
 
         if not student:
