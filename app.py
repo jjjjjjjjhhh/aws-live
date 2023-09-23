@@ -394,6 +394,8 @@ def search_student():
         student_id = request.form["searchStudId"]
         print("Student ID entered:", student_id)
         student = Student.query.get(student_id)
+
+        return redirect(url_for("display_student", student_id=student.student_id))
         
 
         if not student:
@@ -408,7 +410,7 @@ def search_student():
         if request.form.get("searchDelete"):
             return redirect(url_for("confirm_delete", student_id=student.student_id))
 
-    return render_template("displayStudent.html", student_id=student.student_id)
+    return render_template("modifyOrDelete.html")
 
 @app.route("/displayStudent.html")
 def display_student(student_id):
