@@ -100,7 +100,8 @@
 
             </div>
 
-            
+            {% if student %}
+
             <div class="text-center">
                 <h1 class="text-center mt-4">Student Record</h1>
             </div>
@@ -118,8 +119,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% if student %}
-
                     
                     <tr>
                         <td>{{ student.student_id }}</td>
@@ -132,7 +131,7 @@
                         <td>{{ student.end_date }}</td>
                     	
                     </tr>
-                    {% endif %} 
+                    
                 </tbody>
 
                  
@@ -143,7 +142,7 @@
                 <input type="submit" class="btn btn-primary" name="searchDelete" value="Delete" onclick="return confirm('Are you sure you want to delete this student record?')">
             </form> 
 
-             
+            {% endif %}  
            
 
             <!-- Footer Start -->

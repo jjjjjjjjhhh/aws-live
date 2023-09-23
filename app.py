@@ -389,6 +389,7 @@ def search_student():
     if request.method == "POST":
         
         student_id = request.form["searchStudId"]
+        print("Student ID entered:", student_id)
         student = Student.query.get(student_id)
 
         if not student:
@@ -396,11 +397,11 @@ def search_student():
             return redirect(url_for("search_student"))
 
        
-        if request.form.get("modify"):
+        if request.form.get("searchModify"):
             return redirect(url_for("modify_student", student_id=student.student_id))
 
         
-        if request.form.get("delete"):
+        if request.form.get("searchDelete"):
             return redirect(url_for("confirm_delete", student_id=student.student_id))
 
     return render_template("modifyOrDelete.html")
