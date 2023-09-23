@@ -393,7 +393,7 @@ def search_student():
 
         if not student:
             flash("Student not found. Please enter a valid student ID.")
-            return redirect(url_for("modify_or_delete"))
+            return redirect(url_for("search_student"))
 
        
         if request.form.get("modify"):
