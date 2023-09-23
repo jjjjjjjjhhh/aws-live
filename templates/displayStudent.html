@@ -83,7 +83,7 @@
 
             
 
-            
+            {% if student %}
 
             <div class="text-center">
                 <h1 class="text-center mt-4">Student Record</h1>
@@ -124,6 +124,8 @@
                 <input type="submit" class="btn btn-primary" name="searchModify" value="Modify">
                 <input type="submit" class="btn btn-primary" name="searchDelete" value="Delete" onclick="return confirm('Are you sure you want to delete this student record?')">
             </form> 
+
+            {% endif %} 
 
             
 
