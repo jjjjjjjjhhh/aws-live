@@ -405,7 +405,7 @@ def search_student():
     return render_template("modifyOrDelete.html")
 
 @app.route("/search_student", methods=["GET", "POST"])
-def search_student():
+def search_student2():
     if request.method == "POST":
         
         student_id = request.form["searchStudId"]
