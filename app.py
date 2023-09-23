@@ -450,8 +450,8 @@ def modify_student(student_id):
         student.start_date = request.form.get("modifyStudSDate", student.start_date)
         student.end_date = request.form.get("modifyStudEDate", student.end_date)
         db.session.commit()
-        flash("Student information updated successfully.")
-        return redirect(url_for("modify_or_delete"))
+        #flash("Student information updated successfully.")
+        return redirect(url_for("after_submit"))
 
     return render_template("ModifyStudent.html", student=student)
 
