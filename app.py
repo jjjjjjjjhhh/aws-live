@@ -458,7 +458,7 @@ def modify_student(student_id):
 @app.route("/modify_student")
 def modify_student2():
     
-    return redirect(url_for("after_submit"))
+    return render_template("AfterSubmit.html")
 
    
 
