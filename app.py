@@ -393,6 +393,7 @@ def search_student():
         
         student_id = request.form["searchStudId"]
         print("Student ID entered:", student_id)
+        student = Student.query.get(student_id)
         
 
         if not student:
