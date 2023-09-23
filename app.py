@@ -509,7 +509,6 @@ def modify_lecturer(lecturer_id):
         lecturer.name = request.form.get("modifyLecName", lecturer.name)
         lecturer.email = request.form.get("modifyLecEmail", lecturer.email)
         lecturer.phone_number = request.form.get("modifyLecPhone", lecturer.phone_number)
-        lecturer.company = request.form.get("modifyLecCom", lecturer.company)
         lecturer.specialisation = request.form.get("modifyLecDate", lecturer.specialisation)
         db.session.commit()
         
