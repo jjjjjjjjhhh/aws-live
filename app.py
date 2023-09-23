@@ -462,9 +462,9 @@ def modify_student(student_id):
 @app.route("/confirmDeleteStud.html/<string:student_id>", methods=["GET", "POST"])
 def confirm_delete(student_id):
     student = Student.query.get(student_id)
-    studentReport = Report.query.get(student_id)
+    #studentReport = Report.query.get(student_id)
     if request.method == "POST":
-        db.session.delete(studentReport)
+       # db.session.delete(studentReport)
         db.session.delete(student)
         db.session.commit()
         return redirect(url_for("after_submit"))
