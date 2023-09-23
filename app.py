@@ -404,7 +404,7 @@ def search_student():
 
     return render_template("modifyOrDelete.html")
 
-@app.route("search_student", methods=["GET", "POST"])
+@app.route("/search_student", methods=["GET", "POST"])
 def search_student():
     if request.method == "POST":
         
