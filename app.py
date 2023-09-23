@@ -455,6 +455,13 @@ def modify_student(student_id):
 
     return render_template("ModifyStudent.html", student=student)
 
+@app.route("/modify_student")
+def modify_student2():
+    
+    return redirect(url_for("after_submit"))
+
+   
+
 @app.route("/confirmDeleteStud.html/<string:student_id>", methods=["GET", "POST"])
 def confirm_delete(student_id):
     student = Student.query.get(student_id)
