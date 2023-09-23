@@ -404,6 +404,27 @@ def search_student():
 
     return render_template("modifyOrDelete.html")
 
+@app.route("search_student", methods=["GET", "POST"])
+def search_student():
+    if request.method == "POST":
+        
+        student_id = request.form["searchStudId"]
+        student = Student.query.get(student_id)
+
+        if not student:
+            flash("Student not found. Please enter a valid student ID.")
+            return redirect(url_for("modify_or_delete"))
+
+       
+        if request.form.get("modify"):
+            return redirect(url_for("modify_student", student_id=student.student_id))
+
+        
+        if request.form.get("delete"):
+            return redirect(url_for("confirm_delete", student_id=student.student_id))
+
+    return render_template("modifyOrDelete.html")
+
 
 @app.route("/ModifyStudent.html/<string:student_id>", methods=["GET", "POST"])
 def modify_student(student_id):
