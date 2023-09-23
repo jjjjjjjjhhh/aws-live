@@ -415,7 +415,7 @@ def search_student():
 @app.route("/displayStudent.html/<string:student_id>")
 def display_student(student_id):
     
-    
+    print("Student ID entered:", student_id)
     student = Student.query.get(student_id)
     if not student:
         flash("Student not found. Please enter a valid student ID.")
