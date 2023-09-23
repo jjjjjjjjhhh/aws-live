@@ -84,10 +84,10 @@
             <div class="container-xxl bg-white p-0">
                 <h1 class="text-center mt-4">Are you sure you want to delete the student record for {{ student.student_id }}?</h1>
                 <h3 class="mt-4">This action cannot be undone</h3>
-                <form action="{{ url_for('confirm_delete', student_id=student.student_id) }} method="POST">
-
+                <form action="{{ url_for('confirm_delete', student_id=student.student_id) }}" method="POST">
                     <input type="submit" class="btn btn-primary" value="Yes, Delete">
                 </form>
+                
                     
 
             </div>
