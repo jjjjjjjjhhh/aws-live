@@ -453,6 +453,7 @@ def modify_student(student_id):
         #flash("Student information updated successfully.")
         return redirect(url_for("after_submit"))
 
+
     
 
 @app.route("/confirmDeleteStud.html/<string:student_id>", methods=["GET", "POST"])
