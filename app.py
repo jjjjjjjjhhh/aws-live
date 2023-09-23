@@ -395,8 +395,7 @@ def search_student():
         if not student:
             flash("Student not found. Please enter a valid student ID.")
             return redirect(url_for("search_student"))
-
-       
+        
         if request.form.get("searchModify"):
             return redirect(url_for("modify_student", student_id=student.student_id))
 
@@ -404,22 +403,10 @@ def search_student():
         if request.form.get("searchDelete"):
             return redirect(url_for("confirm_delete", student_id=student.student_id))
 
-    return render_template("showingOutputModifyOrDelete.html", student_id=student.student_id)
 
+       
 
-@app.route("/showingOutputModifyOrDelete.html" , methods=["GET", "POST"])
-def showing_student(student_id):
-    student = Student.query.get(student_id)
-
-    if request.form.get("searchModify"):
-        return redirect(url_for("modify_student", student_id=student.student_id))
-
-        
-    if request.form.get("searchDelete"):
-        return redirect(url_for("confirm_delete", student_id=student.student_id)) 
- 
-
-    return render_template("showingOutputModifyOrDelete.html")
+    return render_template("modifyOrDelete.html", student=student)
 
 
 
